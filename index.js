@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var jade = require("jade");
 var mkd = require("markdown").markdown;
 var fs = require('fs');
