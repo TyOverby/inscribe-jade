@@ -17,8 +17,8 @@ function main() {
         'compileDebug': false,
     });
 
-    blog['_posts_'].forEach(function (post){
-        compilePost(blog, post, jadeFn);
+    blog._posts_.forEach(function (post){
+        compilePost(blog, post, jadeFn, blog._outDir_);
     });
 }
 
@@ -29,16 +29,15 @@ function main() {
  * `jadeFn` is the jade compile function that is used to generate
  *          the output.
  */
-function compilePost(blog, post, jadeFn) {
-    var loc = post['_file_'].slice(0,post['_file_'].lastIndexOf("."));
-    console.log(loc);
+function compilePost(blog, post, jadeFn, outDir) {
+    var loc = post._file_.slice(0,post._file_.lastIndexOf("."));
     var compiled = jadeFn({
         post: post,
         blog: blog,
-        content: mkd.toHTML(post['_contents_'])
+        content: mkd.toHTML(post._contents_)
     });
 
-    fs.writeFile(loc + ".html", compiled, function (err) {
+    fs.writeFile(outDir + "/" + loc + ".html", compiled, function (err) {
         if (err) throw err;
     });
 }
