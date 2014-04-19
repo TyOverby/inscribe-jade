@@ -1,7 +1,14 @@
 #!/usr/bin/env node
 var jade = require("jade");
-var mkd = require("markdown").markdown;
+var mkd = require("marked");
 var fs = require('fs');
+var hi = require('highlight.js');
+
+mkd.setOptions({
+    highlight: function (code, lang) {
+        return hi.highlight(lang, code).value;
+    }
+});
 
 main();
 function main() {
@@ -34,7 +41,7 @@ function compilePost(blog, post, jadeFn, outDir) {
     var compiled = jadeFn({
         post: post,
         blog: blog,
-        content: mkd.toHTML(post._contents_)
+        content: mkd(post._contents_)
     });
 
     fs.writeFile(outDir + "/" + loc + ".html", compiled, function (err) {
