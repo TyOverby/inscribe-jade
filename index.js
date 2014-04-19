@@ -22,6 +22,13 @@ function main() {
     });
 }
 
+/*
+ * Compiles a blog post.
+ * `blog` is the JSON form of the entire bundle.json file.
+ * `post` is the JSON form of the post that is being compiled.
+ * `jadeFn` is the jade compile function that is used to generate
+ *          the output.
+ */
 function compilePost(blog, post, jadeFn) {
     var loc = post['_file_'].slice(0,post['_file_'].lastIndexOf("."));
     console.log(loc);
