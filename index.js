@@ -6,7 +6,11 @@ var hi = require('highlight.js');
 
 mkd.setOptions({
     highlight: function (code, lang) {
-        return hi.highlight(lang, code).value;
+        if(lang){
+            return hi.highlight(lang, code).value;
+        } else {
+            return code;
+        }
     }
 });
 
